@@ -1,11 +1,17 @@
 package com.example.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -94,7 +100,18 @@ public class Employee {
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="profile_id")
 	private Profile profile;
-	//private Address address;
+	
+	@OneToMany(cascade=CascadeType.ALL, mappedBy="employee")
+	private List<Address> address;
+	
+	
+	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+    @JoinTable(
+        name = "employee_skills", 
+        joinColumns = { @JoinColumn(name = "emp_id") }, 
+        inverseJoinColumns = { @JoinColumn(name = "skill_id") }
+    )
+	private List<Skill> skill = new ArrayList<>();
 	
 	// Constructors
 	public Employee() {}
@@ -152,6 +169,25 @@ public class Employee {
 
 	public void setProfile(Profile profile) {
 		this.profile = profile;
+	}
+
+	public List<Address> getAddress() {
+		return address;
+	}
+
+
+	public void setAddress(List<Address> address) {
+		this.address = address;
+	}
+
+	public List<Skill> getSkill() {
+		return skill;
+	}
+
+
+
+	public void setSkill(List<Skill> skill) {
+		this.skill = skill;
 	}
 
 

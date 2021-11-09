@@ -68,6 +68,7 @@ public class EmployeeDaoImpl implements IEmployeeDao {
 		// Update employee
 		dbEmp.setName(employee.getName());
 		dbEmp.setDept(employee.getDept());
+		dbEmp.setSkill(employee.getSkill());
 		
 		// save employee with updated details
 		em.merge(dbEmp);

@@ -3,6 +3,8 @@ package com.example.entity;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Address {
@@ -14,6 +16,9 @@ public class Address {
 	private String city;
 	private String state;
 	
+	@ManyToOne
+	@JoinColumn(name="emp_id")
+	private Employee employee;
 	
 	// Constructors
 	public Address() {}
@@ -55,6 +60,15 @@ public class Address {
 
 	public void setState(String state) {
 		this.state = state;
+	}
+
+	
+	public Employee getEmployee() {
+		return employee;
+	}
+
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
 	}
 
 	@Override
