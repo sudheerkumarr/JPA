@@ -13,6 +13,7 @@ public interface IEmployeeService {
 	List<Employee> getEmployeeByName(String empName);
 	List<Employee> getAllEmployees();
 	Employee updateEmployeeName(int empId, String newName);
+	Employee updateProfile(int empId, int profileId);
 	
 
 }

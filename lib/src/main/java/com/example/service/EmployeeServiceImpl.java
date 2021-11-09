@@ -52,6 +52,11 @@ public class EmployeeServiceImpl implements IEmployeeService {
 		return empDao.updateEmployeeName(empId, newName);
 	}
 
+	@Override
+	public Employee updateProfile(int empId, int profileId) {
+		return empDao.updateProfile(empId, profileId);
+	}
+
 	
 
 }

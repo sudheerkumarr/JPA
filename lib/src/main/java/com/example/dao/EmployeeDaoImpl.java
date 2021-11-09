@@ -8,6 +8,7 @@ import javax.persistence.Persistence;
 import javax.persistence.Query;
 
 import com.example.entity.Employee;
+import com.example.entity.Profile;
 
 public class EmployeeDaoImpl implements IEmployeeDao {
 
@@ -69,7 +70,7 @@ public class EmployeeDaoImpl implements IEmployeeDao {
 		dbEmp.setDept(employee.getDept());
 		
 		// save employee with updated details
-		em.persist(dbEmp);
+		em.merge(dbEmp);
 		
 		em.getTransaction().commit();
 		
@@ -101,13 +102,15 @@ public class EmployeeDaoImpl implements IEmployeeDao {
 				
 		// Get emp by name
 		//Employee emp= em.find(Employee.class, empName);
-		Query q = em.createQuery("select e from Employee e where e.name=:empName"); // JPQL Query
+		Query q = em.createQuery("select e from Employee e where e.name=:name"); // JPQL Query
+		q.setParameter("name", empName);
 		
+		List<Employee> empList = q.getResultList();
 		
 		em.close();
 		emf.close();
 	
-		return null;
+		return empList;
 	}
 
 	@Override
@@ -115,12 +118,12 @@ public class EmployeeDaoImpl implements IEmployeeDao {
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("PU");
 		EntityManager em= emf.createEntityManager();
 		
-		em.createQuery("select e from Employee e");
+		List<Employee> empList= em.createQuery("select e from Employee e").getResultList();
 		
 		em.close();
 		emf.close();
 		
-		return null;
+		return empList;
 	}
 
 	// update name
@@ -143,6 +146,32 @@ public class EmployeeDaoImpl implements IEmployeeDao {
 		em.getTransaction().commit();
 		
 		return dbEmp;
+	}
+
+	@Override
+	public Employee updateProfile(int empId, int profileId) {
+		
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("PU");
+		EntityManager em= emf.createEntityManager();
+		
+		// Get emp by id
+		Employee dbEmp= em.find(Employee.class, empId);
+		
+		// Get profile by id 
+		Profile dbProfile = em.find(Profile.class, profileId);
+		
+		em.getTransaction().begin();
+		
+		// Update employee profile
+		dbEmp.setProfile(dbProfile);
+		
+		// update emp in db
+		em.merge(dbEmp);
+		
+		em.getTransaction().commit();
+		
+		return dbEmp;
+		
 	}
 
 	

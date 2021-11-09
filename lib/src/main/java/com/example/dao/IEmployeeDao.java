@@ -14,5 +14,7 @@ public interface IEmployeeDao {
 	List<Employee> getAllEmployees();
 	Employee updateEmployeeName(int empId, String newName);
 	
+	Employee updateProfile(int empId, int profileId);
+	
 	
 }
