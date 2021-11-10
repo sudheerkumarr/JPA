@@ -1,5 +1,8 @@
 package com.example;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.xml.XmlBeanFactory;
 import org.springframework.context.ApplicationContext;
@@ -123,9 +126,47 @@ By Setter Method
 public class Test {
 
 	public static void main(String[] args) {
-		// 
 		
-		//Employee emp = new Employee("Ram");
+		ApplicationContext context = 
+	    		new ClassPathXmlApplicationContext("applicationContextSI.xml");
+	    
+	    Employee emp1 = (Employee)context.getBean("emp1");
+	    
+	    System.out.println(emp1.getEmpId());
+	    System.out.println(emp1.getName());
+	    System.out.println(emp1.getAddress());
+	    System.out.println(emp1.getAddress().getState());
+	    System.out.println(emp1.getContactNos());
+	    System.out.println(emp1.getContactNos().get(1));
+	    		
+		
+		/* Constructor Injection
+		 * Address addr = new Address("Chennai", "TN");
+		 * List<String> contactNos = new ArrayList<>();
+		 * contactNos.add("9999911111");
+		 * contactNos.add("9999911112");
+		 * contactNos.add("9999911113");
+		 * Employee emp = new Employee(1001, "Ram", addr, contactNos);
+		
+		
+		
+		// Setter Injection
+		 Address addr = new Address();
+		 addr.setCity("Chennai");
+		 addr.setState("TN");
+		 
+		Employee emp1 = new Employee();
+		emp1.setName("Ram");
+		emp1.setEmpId(1002);
+		emp1.setAddress(addr);
+		List<String> contactNos = new ArrayList<>();
+		contactNos.add("999956586");
+		contactNos.add("999956587");
+		emp1.setContactNos(contactNos);
+		
+		
+		
+		
 		//System.out.println(emp.getName());
 		
 		//Address addr = new Address("", "");
@@ -180,6 +221,10 @@ public class Test {
 	    System.out.println("After: ");
 	    System.out.println(emp1.getAddress().getCity());
 	    
+	    System.out.println();
+	    System.out.println(emp1.getContactNos());
+	    
+	    */
 	    
 	    
 		

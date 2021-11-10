@@ -35,8 +35,7 @@ dependencies {
 	// https://mvnrepository.com/artifact/org.springframework/spring-context
 	implementation group: 'org.springframework', name: 'spring-context', version: '5.3.12'
 	
-	// https://mvnrepository.com/artifact/org.springframework/spring-context
-	implementation group: 'org.springframework', name: 'spring-context', version: '5.3.12'
+
 	
     
 }

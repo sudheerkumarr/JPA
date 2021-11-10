@@ -1,13 +1,19 @@
-package com.example.entity;
+package com.javabased.config.entity;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+@Component
 public class Employee {
 	
 	// Fields
 	private int empId;
 	private String name;
 	
+	// Field Injection
+	@Autowired
 	private Address address;
 	
 	private List<String> contactNos;
@@ -31,7 +37,10 @@ public class Employee {
 		this.name = name;
 	}
 	
-
+	// @Autowired - Constructor injection
+	public Employee(Address address) {
+		this.address = address;
+	}
 	public Employee(int empId, String name, Address address, List<String> contactNos) {
 		super();
 		this.empId = empId;
@@ -58,6 +67,8 @@ public class Employee {
 		return address;
 	}
 
+	// Setter Injection
+	//@Autowired
 	public void setAddress(Address address) {
 		this.address = address;
 	}
@@ -70,6 +81,12 @@ public class Employee {
 		this.contactNos = contactNos;
 	}
 
+	public void display() {
+		System.out.println();
+		System.out.println(address.getCity());
+		System.out.println(address.getState());
+	}
+	
 	@Override
 	public String toString() {
 		return "Employee [empId=" + empId + ", name=" + name + "]";
